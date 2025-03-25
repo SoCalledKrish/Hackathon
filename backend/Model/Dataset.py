@@ -45,6 +45,6 @@ if __name__ == "__main__":
     file_path = "C:/Users/elakiyag/Downloads/student_marks.csv"  # Replace with actual file path
     df = load_data(file_path)
     print("Columns in dataset:", df.columns.tolist())
-    target_column = input("Enter the target variable: ")
+    target_column = 'Status'
     X_train, X_test, y_train, y_test, encoders = preprocess_data(df, target_column)
     print("Preprocessing complete. Ready for model training!")
