@@ -118,11 +118,11 @@
 
 
 
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Box, Typography, Card, CardContent, Modal, Backdrop, Fade, TextField, Button } from "@mui/material";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import backgroundImage from "../assets/Ellucian1.png";
 
 const Dashboard = () => {
@@ -142,7 +142,7 @@ const Dashboard = () => {
   const handleCloseModal = () => setModalOpen(false);
   const handleNext = () => navigate("/datasource");
 
-  // 🔹 Logout function
+  // Logout function
   const handleLogout = () => {
     localStorage.removeItem("token"); // Remove stored token
     navigate("/"); // Redirect to login page
@@ -156,14 +156,17 @@ const Dashboard = () => {
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
+        display: "flex",
+        flexDirection: "column",
       }}
     >
       <Box sx={{ position: "absolute", width: "100%", height: "100%", backgroundColor: "rgba(0, 0, 0, 0.5)" }} />
-      
-      {/* Navbar (Logout button is inside it) */}
+
+      {/* Navbar */}
       <Navbar onLogout={handleLogout} />
 
-      <Box sx={{ position: "relative", p: 3, mt: 5, mx: "auto", width: "90%", maxWidth: "1200px", textAlign: "center" }}>
+      {/* Main Content */}
+      <Box sx={{ flexGrow: 1, position: "relative", p: 3, mt: 5, mx: "auto", width: "90%", maxWidth: "1200px", textAlign: "center" }}>
         <Typography variant="h3" sx={{ mb: 5, color: "#fff", fontWeight: "bold", textShadow: "2px 2px 10px rgba(0, 0, 0, 0.5)" }}>
           Your AI Custom Application
         </Typography>
@@ -237,11 +240,15 @@ const Dashboard = () => {
           </Box>
         </Fade>
       </Modal>
+
+      {/* Footer */}
+      <Footer />
     </Box>
   );
 };
 
 export default Dashboard;
+
 
 
 

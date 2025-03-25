@@ -1,10 +1,11 @@
 import { Box, Typography, Card, CardContent } from "@mui/material";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import backgroundImage from "../assets/Ellucian1.png";
+import Footer from "../components/Footer"; // Import Footer
 
 const DataSource = () => {
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
   const dataSources = [
     { title: "Ellucian Banner", description: "Extract data from Ellucian Banner.", path: "/ellucian-banner" },
@@ -14,7 +15,7 @@ const DataSource = () => {
   ];
 
   const handleCardClick = (path) => {
-    navigate(path); // Navigate to the specified route
+    navigate(path);
   };
 
   return (
@@ -25,6 +26,8 @@ const DataSource = () => {
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
+        display: "flex",
+        flexDirection: "column",
       }}
     >
       {/* Dark Overlay */}
@@ -34,7 +37,7 @@ const DataSource = () => {
       <Navbar />
 
       {/* Main Section */}
-      <Box sx={{ position: "relative", p: 3, mt: 5, mx: "auto", width: "90%", maxWidth: "1200px", textAlign: "center" }}>
+      <Box sx={{ flexGrow: 1, position: "relative", p: 3, mt: 5, mx: "auto", width: "90%", maxWidth: "1200px", textAlign: "center" }}>
         {/* Page Title */}
         <Typography
           variant="h3"
@@ -68,7 +71,7 @@ const DataSource = () => {
                 justifyContent: "center",
                 textAlign: "center",
               }}
-              onClick={() => handleCardClick(data.path)} // Click event
+              onClick={() => handleCardClick(data.path)}
             >
               <CardContent>
                 <Typography variant="h4" sx={{ fontWeight: "bold", mb: 1 }}>
@@ -82,6 +85,9 @@ const DataSource = () => {
           ))}
         </Box>
       </Box>
+
+      {/* Footer */}
+      <Footer />
     </Box>
   );
 };

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Box, Typography, Card, CardContent, TextField, Button, Modal, Backdrop, Fade } from "@mui/material";
 import Navbar from "../components/Navbar";
 import backgroundImage from "../assets/Ellucian1.png";
+import Footer from "../components/Footer";
 
 const UserDashboard = () => {
   const navigate = useNavigate();
@@ -14,17 +15,17 @@ const UserDashboard = () => {
     field4: "",
   });
 
-  // 🔹 Logout function
+  // Logout function
   const handleLogout = () => {
     localStorage.removeItem("token"); // Remove stored token
     navigate("/"); // Redirect to login page
   };
 
-  // 🔹 Handle modal open/close
+  // Handle modal open/close
   const handleOpenModal = () => setModalOpen(true);
   const handleCloseModal = () => setModalOpen(false);
 
-  // 🔹 Handle input change
+  // Handle input change
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -39,20 +40,20 @@ const UserDashboard = () => {
         backgroundPosition: "center",
         display: "flex",
         flexDirection: "column",
-        alignItems: "center",
       }}
     >
       <Box sx={{ position: "absolute", width: "100%", height: "100%", backgroundColor: "rgba(0, 0, 0, 0.5)" }} />
       
-      {/* Navbar (Logout button is inside it) */}
+      {/* Navbar */}
       <Navbar onLogout={handleLogout} />
 
-      <Box sx={{ position: "relative", p: 3, mt: 5, textAlign: "center", width: "100%", maxWidth: "1200px" }}>
+      {/* Main Content */}
+      <Box sx={{ flexGrow: 1, position: "relative", p: 3, mt: 5, textAlign: "center", width: "100%", maxWidth: "1200px", mx: "auto" }}>
         <Typography variant="h3" sx={{ mb: 5, color: "#fff", fontWeight: "bold", textShadow: "2px 2px 10px rgba(0, 0, 0, 0.5)" }}>
           Your AI Custom Application
         </Typography>
 
-        {/* Chatbot Feature Card (Centered) */}
+        {/* Chatbot Feature Card */}
         <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
           <Card
             sx={{
@@ -104,7 +105,7 @@ const UserDashboard = () => {
         </Box>
       </Box>
 
-      {/* 🔹 Modal for Form Details */}
+      {/* Modal for Form Details */}
       <Modal open={modalOpen} onClose={handleCloseModal} closeAfterTransition BackdropComponent={Backdrop} BackdropProps={{ timeout: 500 }}>
         <Fade in={modalOpen}>
           <Box
@@ -130,45 +131,18 @@ const UserDashboard = () => {
             </Typography>
 
             {/* Form Fields */}
-            <TextField
-              fullWidth
-              variant="filled"
-              label="Field 1"
-              name="field1"
-              value={formData.field1}
-              onChange={handleChange}
-              sx={{ mb: 2, bgcolor: "rgba(255,255,255,0.1)", borderRadius: "10px", "& label": { color: "#ccc" }, "& input": { color: "#fff" } }}
-            />
-
-            <TextField
-              fullWidth
-              variant="filled"
-              label="Field 2"
-              name="field2"
-              value={formData.field2}
-              onChange={handleChange}
-              sx={{ mb: 2, bgcolor: "rgba(255,255,255,0.1)", borderRadius: "10px", "& label": { color: "#ccc" }, "& input": { color: "#fff" } }}
-            />
-
-            <TextField
-              fullWidth
-              variant="filled"
-              label="Field 3"
-              name="field3"
-              value={formData.field3}
-              onChange={handleChange}
-              sx={{ mb: 2, bgcolor: "rgba(255,255,255,0.1)", borderRadius: "10px", "& label": { color: "#ccc" }, "& input": { color: "#fff" } }}
-            />
-
-            <TextField
-              fullWidth
-              variant="filled"
-              label="Field 4"
-              name="field4"
-              value={formData.field4}
-              onChange={handleChange}
-              sx={{ mb: 3, bgcolor: "rgba(255,255,255,0.1)", borderRadius: "10px", "& label": { color: "#ccc" }, "& input": { color: "#fff" } }}
-            />
+            {["field1", "field2", "field3", "field4"].map((field, index) => (
+              <TextField
+                key={index}
+                fullWidth
+                variant="filled"
+                label={`Field ${index + 1}`}
+                name={field}
+                value={formData[field]}
+                onChange={handleChange}
+                sx={{ mb: 2, bgcolor: "rgba(255,255,255,0.1)", borderRadius: "10px", "& label": { color: "#ccc" }, "& input": { color: "#fff" } }}
+              />
+            ))}
 
             {/* Predict Button */}
             <Button
@@ -188,6 +162,9 @@ const UserDashboard = () => {
           </Box>
         </Fade>
       </Modal>
+
+      {/* Footer */}
+      <Footer />
     </Box>
   );
 };
