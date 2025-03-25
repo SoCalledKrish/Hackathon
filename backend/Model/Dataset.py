@@ -42,7 +42,7 @@ def preprocess_data(df, target_column):
 
 # Example usage
 if __name__ == "__main__":
-    file_path = "C:/Users/elakiyag/Downloads/university_resource_allocation.xlsx"  # Replace with actual file path
+    file_path = "C:/Users/elakiyag/Downloads/student_marks.csv"  # Replace with actual file path
     df = load_data(file_path)
     print("Columns in dataset:", df.columns.tolist())
     target_column = input("Enter the target variable: ")
